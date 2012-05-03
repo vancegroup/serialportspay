@@ -50,19 +50,3 @@ getSerialPorts = function (computer) {
 	}
 	return ret;
 }
-
-
-
-
-var ports = getSerialPorts("ZAPDOS");
-
-for (var portIdx in ports) {
-	var port = ports[portIdx];
-	WScript.Echo(port);
-	WScript.Echo(port.caption);
-	WScript.Echo(port.isEnumerationEnabled() ? "Currently Enumerating!" : "Enumeration disabled like it ought to be");
-	WScript.Echo(port.disableEnumeration());
-	WScript.Echo(port.isEnumerationEnabled());
-	WScript.Echo(port.enableEnumeration());
-	WScript.Echo(port.isEnumerationEnabled());
-}
