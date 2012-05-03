@@ -6,7 +6,7 @@ function include(fileName) {
 	file.Close();
 	return stream;
 }
-eval( include("wmiRegistryTools.js") );
+eval( include("vendor/wmiRegistryTools.js") );
 
 
 SerialPortProxy = function(computer, Caption, DeviceID) {
