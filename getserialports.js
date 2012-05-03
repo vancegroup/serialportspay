@@ -46,7 +46,6 @@ getSerialPorts = function (computer) {
 	for (; !enumItems.atEnd(); enumItems.moveNext()) {
 		var objItem = enumItems.item();
 		ret.push(new SerialPortProxy(computer, objItem.Caption, objItem.DeviceID));
-		WScript.Echo(objItem.Caption + ": " + objItem.DeviceID);
 	}
 	return ret;
 }
