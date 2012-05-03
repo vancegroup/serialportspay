@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=9">
+		<hta:application
+			id="objSerialSpay" 
+			applicationname="SerialPortSpay"
+			scroll="no"
+			singleinstance="yes"
+			windowstate="normal"></hta>
+		<title>Serial Port Spay</title>
+
+		<!-- Le styles -->
+		<link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		  <script src="html5.js"></script>
+		<![endif]-->
+
+		<script id="tablerow" type="text/html">
+			<tr><td>{{ caption }}</td><td>{{ deviceid }}</td><td><button>Disable Enumeration</button></td>
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="hero-unit">
+				<h1>Goodbye Serial Port Drama!</h1>
+				<p>Control whether or not Windows tries to find a Plug-and-Play device on your serial ports.</p>
+				<p><small>Hint: It usually finds a serial mouse.</small></p>
+			</div>
+			<div class="row" id="divTest1">
+				<div class="span12">
+					<table class="table table-bordered" id="porttable">
+						<thead><tr><th>Serial Port</th><th>Enumeration Path</th><th>Action</th></thead>
+						<tr><td>Test</td><td>blabla</td><td><button>Disable Enumeration</button></td>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="vendor/jquery-1.7.2.min.js"></script>
+		<script src="vendor/ICanHaz.min.js"></script>
+		<script src="getserialports.js"></script>
+		<script type="text/javascript">
+			populateLocal = function() {
+				$("#divTest1").append("Trying!");
+				var ports = getSerialPorts(".");
+
+				for (var portIdx in ports) {
+					var port = ports[portIdx];
+					var myrow = ich.tablerow(port);
+					$("#porttable").append(myrow);
+				}
+			};
+			$(document).ready(populateLocal)
+	</body>
+</html>
