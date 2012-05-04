@@ -3931,7 +3931,6 @@ if (typeof exports == 'object' && exports)
     }
 
     if (!linter(content, options)) {
-        WScript.StdErr.WriteLine(label);
         for (i = 0; i < linter.errors.length; i++) {
             // sample error msg:
             //  sprintf.js(53,42) JSLINT: Use the array literal notation [].
@@ -3939,8 +3938,13 @@ if (typeof exports == 'object' && exports)
             if (e !== null) {
                 line = (typeof e.line === 'undefined') ? '0' : e.line;
                 WScript.StdErr.WriteLine(filename + '(' + line + ',' + e.character +
-                                         ') ' + label + ': ' + e.reason);
-                WScript.StdErr.WriteLine('    ' + (e.evidence || '').replace(/^\s*(\S*(\s+\S+)*)\s*$/, '$1'));
+                                         '): ' + e.reason);
+				var caretFiller = (e.character - 1);
+				caretFiller = (caretFiller > 0) ? caretFiller : 1;
+
+				WScript.StdErr.WriteLine('    ' + (e.evidence || '').replace(/\t/, "    "));
+				WScript.StdErr.WriteLine('    ' + new Array(caretFiller).join( " " ) + "^");
+				WScript.StdErr.WriteLine('');
             }
         }
     }
