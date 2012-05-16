@@ -13,13 +13,17 @@ eval( include("getserialports.js") );
 
 var ports = getSerialPorts(".");
 
+checkPort = function(port) {
+	WScript.Echo(port.isEnumerationEnabled() ? "Currently Enumerating!" : "Enumeration disabled like it ought to be");
+}
+
 for (var portIdx in ports) {
 	var port = ports[portIdx];
 	WScript.Echo(port);
 	WScript.Echo(port.caption);
-	WScript.Echo(port.isEnumerationEnabled() ? "Currently Enumerating!" : "Enumeration disabled like it ought to be");
+	checkPort(port);
 	WScript.Echo(port.disableEnumeration());
-	WScript.Echo(port.isEnumerationEnabled());
+	checkPort(port);
 	WScript.Echo(port.enableEnumeration());
-	WScript.Echo(port.isEnumerationEnabled());
+	checkPort(port);
 }
