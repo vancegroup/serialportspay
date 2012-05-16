@@ -19,7 +19,7 @@ SerialPortProxy = function(computer, Caption, DeviceID) {
 	self.keyBase = "SYSTEM\\CurrentControlSet\\Enum\\" + DeviceID;
 	self.isEnumerationEnabled = function() {
 		var ret = registryToolsReadValue(self.computer, "HKLM", self.keyBase + "\\Device Parameters", "SkipEnumerations", "REG_DWORD");
-		return ( ret == -1 ); // -1 is 0xFFFFFFFF
+		return !( ret == -1 || ret == 0xFFFFFFFF); // -1 is 0xFFFFFFFF
 	};
 
 	self.disableEnumeration = function() {
